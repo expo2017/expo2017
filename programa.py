@@ -3,6 +3,7 @@ import pymysql
 import pygame
 from pygame.locals import *
 import random
+import time
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
@@ -16,10 +17,8 @@ def rutaimagensorpresa(numero):#devuelve la ruta de la imagen sorpresa(se le pas
     c.execute(consulta)
     for ruta in c:
         foto=ruta
+    print(foto)
     return foto
-
-#guardar imagen(inserts)(guardar en el disco)
-#contar fotos de la base
 
 """def guardarimagenendisco(foto):
     eg.msgbox(foto, "fileopenbox", ok_button="Continuar")
@@ -32,14 +31,23 @@ def rutaimagensorpresa(numero):#devuelve la ruta de la imagen sorpresa(se le pas
 
     eg.msgbox(foto, "filesavebox", ok_button="Continuar")"""
 
-def guardarimagenenbd(rutafoto,opcionsorpresa):
+def guardarimagenenbd(rutafoto,opcionsorpresa):#inserts de las rutas
     c=db.cursor()
     consulta="insert into personas_fototomada values("+"null,"+ " ' "+rutafoto+" ' "+","+str(opcionsorpresa)+");"
     c.execute(consulta)
 
+def filtrarruta(ruta):
+    rutafiltrada=""
+    str(ruta)
+    for letra in ruta:
+        if letra!="(" and letra!=")" and letra!="," :
+            rutafiltrada=rutafiltrada+letra
+    return rutafiltrada
 
 def boton():
-    return True
+    boton=random.randint(0,1)
+    print(boton)
+    return boton
 
 def main():
     pygame.init()
@@ -53,9 +61,12 @@ def main():
                 sys.exit()
 
         if boton()==True:
-            #opcionsorpresa=random.randrange(1,len(listadeimagenessorpresa))
-            fondo = pygame.image.load("/home/alumno/Imágenes/Foto_sorpresa/images.jpeg").convert()
+            opcionsorpresa=random.randrange(1,4)
+            ruta=rutaimagensorpresa(opcionsorpresa)
+            rutafiltrada=filtrarruta(ruta)
+            fondo = pygame.image.load(rutafiltrada).convert()
             screen.blit(fondo, (0, 0))# Indicamos la posicion de las "Surface" sobre la ventana
             pygame.display.flip()# se muestran lo cambios en pantalla
+            time.sleep(3)
 
 main()
