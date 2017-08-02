@@ -1,4 +1,3 @@
-
 import pygame
 import pygame.camera
 from pygame.locals import *
@@ -8,7 +7,7 @@ pygame.camera.init()
 
 display = pygame.display.set_mode((640,480), 0)
 cam = pygame.camera.Camera("/dev/video0",(640,480))
-snapshot = pygame.surface.Surface((640,480), 0, display)
+snapshot = pygame.surface.Surface((640,480), 0, Surface=display)
 cam.start()
 image = cam.get_image()
 going = True
