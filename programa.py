@@ -4,6 +4,8 @@ import pygame
 from pygame.locals import *
 import random
 import time
+import pygame.image
+import pygame.camera
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
@@ -19,17 +21,6 @@ def rutaimagensorpresa(numero):#devuelve la ruta de la imagen sorpresa(se le pas
         foto=ruta
     print(foto)
     return foto
-
-"""def guardarimagenendisco(foto):
-    eg.msgbox(foto, "fileopenbox", ok_button="Continuar")
-    extension = ["*.py", "*.pyc"]
-    foto = eg.filesavebox(msg="Guardar archivo",
-                             title="Control: filesavebox",
-                             default='/home/alumno/Documentos',
-                             filetypes=extension
-                             )
-
-    eg.msgbox(foto, "filesavebox", ok_button="Continuar")"""
 
 def guardarimagenenbd(rutafoto,opcionsorpresa):#inserts de las rutas
     c=db.cursor()
@@ -48,6 +39,19 @@ def boton():
     boton=random.randint(0,1)
     print(boton)
     return boton
+
+def guardarimagenendisco(nombre,img):
+    ruta="/home/alumno/Imágenes/fotopersona/"+ str(nombre)
+    pygame.image.save(img,ruta)
+
+def tomarfoto():
+    pygame.camera.init()
+    print(pygame.camera.list_cameras())
+    cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
+    cam.start()
+    img = cam.get_image()
+    pygame.camera.quit()
+    return img
 
 def main():
     pygame.init()
