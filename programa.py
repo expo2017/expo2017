@@ -5,7 +5,7 @@ from pygame.locals import *
 import random
 import time
 import pygame.image
-import pygame.camera
+import pygame.camera/
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
