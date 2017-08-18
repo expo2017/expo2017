@@ -41,17 +41,24 @@ def consultarespuesta(id):
 
     return respuestafiltrada
 
+def contarpreguntas():
+    preguntas = None
+    cantidadfiltrada = ""
+    c = db.cursor()
+    consulta = "select count(idpregunta) from pregunta;"
+    c.execute(consulta)
+    for x in c:
+        preguntas = x
+    for letra in preguntas:
+        if letra != "(" and letra != ")" and letra != "," and letra!= "'":
+             cantidadfiltrada= cantidadfiltrada + letra
 
+    return cantidadfiltrada
 
 def guardarimagenenbd(rutafoto,opcion):#inserts de las rutas
     c=db.cursor()
     consulta="insert into personas_fototomada values("+"null,"+ " ' "+rutafoto+" ' "+","+str(opcion)+");"
     c.execute(consulta)
-
-def boton():
-    #boton=random.randint(0,1)
-    boton=1
-    return boton
 
 def guardarimagenendisco(nombre,img):
     ruta="/home/alumno/Imágenes/Foto_persona/"+ str(nombre)
@@ -70,6 +77,10 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode()
     pygame.display.set_caption("Pregunta")
+    boton = None
+    botonrespuesta = None
+    puntaje=None
+    limite=contarpreguntas()
 
     while True:
         # Posibles entradas del teclado y mouse
@@ -77,15 +88,26 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        if boton()==True:
+        if boton==True:
             opcion=opcion+1
-            #if(opcion se pasa del limite) bonton==false
+            respuestacorrecta=None
+            if(opcion>limite):
+                boton==False
+                #mostarfotopersona y si gano o no con puntaje
+                #volver todas las variables al valor original
             ruta=rutaimagenpregunta(opcion)
             fondo = pygame.image.load(ruta).convert()
             screen.blit(fondo, (0, 0))# Indicamos la posicion de las "Surface" sobre la ventana
             pygame.display.flip()# se muestran lo cambios en pantalla
+            respuestacorrecta=consultarespuesta(opcion)
+            if botonrespuesta==respuestacorrecta:
+                puntaje=puntaje+1
+                #imagendecorrecto
 
 
+
+        if boton==False:
+            #abreimagenprincipal
 
 
 main()
