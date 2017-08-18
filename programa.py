@@ -95,14 +95,16 @@ def main():
                 #mostarfotopersona y si gano o no con puntaje
                 #volver todas las variables al valor original
                 boton == False
-            ruta=rutaimagenpregunta(opcion)
-            fondo = pygame.image.load(ruta).convert()
-            screen.blit(fondo, (0, 0))# Indicamos la posicion de las "Surface" sobre la ventana
-            pygame.display.flip()# se muestran lo cambios en pantalla
-            respuestacorrecta=consultarespuesta(opcion)
-            if botonrespuesta==respuestacorrecta:
-                puntaje=puntaje+1
-                #imagendecorrecto
+            else :
+                ruta=rutaimagenpregunta(opcion)
+                fondo = pygame.image.load(ruta).convert()
+                screen.blit(fondo, (0, 0))# Indicamos la posicion de las "Surface" sobre la ventana
+                pygame.display.flip()# se muestran lo cambios en pantalla
+                respuestacorrecta=consultarespuesta(opcion)
+                if botonrespuesta==respuestacorrecta:
+                    puntaje=puntaje+1
+                    #imagendecorrecto
+
         #if boton==False:
             #abreimagenprincipal
 
