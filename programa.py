@@ -43,16 +43,18 @@ def consultarespuesta(id):
 
 def contarpreguntas():
     preguntas = None
-    cantidadfiltrada = ""
+    cantidadfiltrada = 0
     c = db.cursor()
     consulta = "select count(idpregunta) from pregunta;"
     c.execute(consulta)
     for x in c:
         preguntas = x
+
     for letra in preguntas:
-        if letra != "(" and letra != ")" and letra != "," and letra!= "'":
+        if letra != "(" and letra != ")" and letra != "," and letra != "'":
              cantidadfiltrada= cantidadfiltrada + letra
 
+    print(cantidadfiltrada)
     return cantidadfiltrada
 
 def guardarimagenenbd(rutafoto,opcion):#inserts de las rutas
@@ -77,6 +79,12 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode()
     pygame.display.set_caption("Pregunta")
+    background = pygame.Surface(screen.get_size())
+    background = background.convert()
+    background.fill((250, 250, 250))
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
+
     boton = None
     botonrespuesta = None
     puntaje=None
