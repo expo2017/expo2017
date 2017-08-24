@@ -8,7 +8,7 @@ print(pygame.camera.list_cameras())
 cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
 cam.start()
 img = cam.get_image()
-pygame.image.save(img, "/home/alumno/Imágenes/fotopersona/photo4.jpg")
+pygame.image.save(img, "/home/alumno/Imágenes/fotopersona/photo6.jpg")
 img = Image.open("/home/alumno/Imágenes/fotopersona/photo4.jpg")
 mirror(img).show()#cada vez que se muestra la imagen espejar
 
