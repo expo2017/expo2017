@@ -6,6 +6,7 @@ import random
 import time
 import pygame.image
 import pygame.camera
+import sys
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
@@ -77,11 +78,12 @@ def tomarfoto():
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode()
+    screen = pygame.display.set_mode((1021,765),pygame.FULLSCREEN)
     pygame.display.set_caption("Pregunta")
+
     background = pygame.Surface(screen.get_size())
     background = background.convert()
-    background.fill((250, 250, 250))
+    background.fill((255, 255, 255))
     screen.blit(background, (0, 0))
     pygame.display.flip()
 
@@ -95,6 +97,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            if event.type==pygame.K_ESCAPE:
+                quit()
+            if event.type== QUIT:
+                exit()
+            if event.type==KEYDOWN:
+                if event.key==K_q:
+                    exit()
 
         if boton==True:
             opcion=opcion+1
@@ -109,9 +118,12 @@ def main():
                 screen.blit(fondo, (0, 0))# Indicamos la posicion de las "Surface" sobre la ventana
                 pygame.display.flip()# se muestran lo cambios en pantalla
                 respuestacorrecta=consultarespuesta(opcion)
+                #definir limitedetiempo
+                #while(limitar)
                 if botonrespuesta==respuestacorrecta:
                     puntaje=puntaje+1
                     #imagendecorrecto
+                    #limitedetiempo=0
 
         #if boton==False:
             #abreimagenprincipal
