@@ -64,7 +64,7 @@ def guardarimagenenbd(rutafoto,opcion):#inserts de las rutas
     c.execute(consulta)
 
 def guardarimagenendisco(nombre,img):
-    ruta="/home/alumno/Imágenes/Foto_persona/"+ str(nombre)
+    ruta="/home/pi/Pictures/fotopersona/"+ str(nombre)
     pygame.image.save(img,ruta)
 
 def tomarfoto():
@@ -73,8 +73,9 @@ def tomarfoto():
     cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
     cam.start()
     img = cam.get_image()
+    #funcionguardardentrodeestoconuncountdefototomada
     pygame.camera.quit()
-    return img
+
 
 def main():
     pygame.init()
@@ -112,7 +113,7 @@ def main():
                 #mostarfotopersona y si gano o no con puntaje
                 #volver todas las variables al valor original
                 boton == False
-            else :
+            else :#falta guardar imagenes tomadas
                 ruta=rutaimagenpregunta(opcion)
                 fondo = pygame.image.load(ruta).convert()
                 screen.blit(fondo, (0, 0))# Indicamos la posicion de las "Surface" sobre la ventana
@@ -124,9 +125,14 @@ def main():
                     puntaje=puntaje+1
                     #imagendecorrecto
                     #limitedetiempo=0
+                #if botonrespuesta==respuestacorrecta:
+                    # imagendeincorrectoconrespuesta
+                    #alarma,luz roja
+                    #foto
 
         #if boton==False:
             #abreimagenprincipal
+            #mirror(img).show()#cada vez que se muestra la imagen espejar
 
 
 main()
