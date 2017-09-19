@@ -12,9 +12,9 @@ import sys
 db=pymysql.connect(host="172.16.2.250",user="root",password="alumno",db="las_chicas",autocommit=True)
 listadedatos=[]
 
-def guardarimagenenbd(rutafoto,opcion):#inserts de las rutas
+def guardarimagenenbd(rutafoto,id):#inserts de las rutas
     c=db.cursor()
-    consulta="insert into personas_fototomada values("+"null,"+ " ' "+rutafoto+" ' "+","+str(opcion)+");"
+    consulta="insert into persona values("+"null,"+ " ' "+rutafoto+" ' "+","+str(id)+");"
     c.execute(consulta)
 
 def tomarfoto():
@@ -26,7 +26,7 @@ def tomarfoto():
     #funcionguardardentrodeestoconuncountdefototomada
     pygame.camera.quit()
 
-def datosdelabase():
+def extraerdatosdelabase():
     nuevadirreccion=direccion()
     c = db.cursor()
     c.execute("select * from direccion;")
@@ -41,6 +41,12 @@ def datosdelabase():
         nuevadirreccion.setnivel(item[7])
         listadedatos.append(nuevadirreccion)
         print(item)
+
+def agregarnivelalista(lista,nivel):
+    for item in listadedatos:
+        if item.nivel == nivel:
+            lista.append(item)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((1021, 765), pygame.FULLSCREEN)
@@ -50,7 +56,32 @@ def main():
     background.fill((255, 255, 255))
     screen.blit(background, (0, 0))
 
+    extraerdatosdelabase()
+    listaenjuego=[]
+    start=False
+    nivel=1
     while True:
+        if start==True:
+            if nivel==1:
+                agregarnivelalista(listadedatos,1)
+                jugadas=10
+
+                while jugadas>0:
+                    variablerandom=random(0,len(listadedatos))
+                    fondo = pygame.image.load(listadedatos[variablerandom].fotodireccion).convert()
+                    screen.blit(fondo, (0, 0))  # Indicamos la posicion de las "Surface" sobre la ventana
+                    pygame.display.flip()  # se muestran lo cambios en pantalla
+                    tiempo=10
+                    ciclo=True
+
+                    while ciclo==True:
+
+
+
+
+
+
+
         # Posibles entradas del teclado y mouse
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -64,4 +95,3 @@ def main():
                     exit()
 
 
-datosdelabase()
