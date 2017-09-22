@@ -1,5 +1,4 @@
-
-from clases.direccion import direccion
+from .clases.direccion import direccion
 from PIL import Image
 import pymysql
 import pygame
@@ -56,19 +55,21 @@ def main():
     background = background.convert()
     background.fill((255, 255, 255))
     screen.blit(background, (0, 0))
-
+    puntos=0
     extraerdatosdelabase()
     listaenjuego=[]
     start=False
     nivel=1
+    gano=True
     while True:
-        if start==True:
+        while start==True:
+
             if nivel==1:
-                agregarnivelalista(listadedatos,1)
+                agregarnivelalista(listaenjuego,1)
                 jugadas=10
 
                 while jugadas>0:
-                    variablerandom=random(0,len(listadedatos))
+                    variablerandom=random(0,len(listaenjuego))
                     fondo = pygame.image.load(listadedatos[variablerandom].fotodireccion).convert()
                     screen.blit(fondo, (0, 0))  # Indicamos la posicion de las "Surface" sobre la ventana
                     pygame.display.flip()  # se muestran lo cambios en pantalla
@@ -76,6 +77,44 @@ def main():
                     ciclo=True
 
                     while ciclo==True:
+                        tiempo=tiempo-0.95
+                        if():#recibealgo
+                            if(listaenjuego[variablerandom].botonarriba==  "recibio"):
+                                puntos=puntos+1
+                                jugadas=jugadas-1
+                                tiempo=0
+                                ciclo=False
+                            if (listaenjuego[variablerandom].botonabajo ==  " recibio"):
+                                puntos=puntos+1
+                                jugadas =jugadas-1
+                                tiempo=0
+                                ciclo=False
+                            if (listaenjuego[variablerandom].botonderecha ==   "recibio"):
+                                puntos=puntos+1
+                                jugadas=jugadas-1
+                                tiempo=0
+                                ciclo=False
+                            if (listaenjuego[variablerandom].botonizquierda ==  "recibio"):
+                                puntos=puntos+1
+                                jugadas=jugadas-1
+                                tiempo=0
+                                ciclo=False
+                        if tiempo==0:
+                            ciclo=False
+                            jugadas=(-1)
+
+                if(juagadas==0):
+                    nivel=2
+                else(jugadas==(-1)):
+                    gano=False
+
+
+            if gano==False:
+                start==False
+
+
+
+
 
 
 
