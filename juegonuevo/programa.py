@@ -1,4 +1,4 @@
-from .clases.direccion import direccion
+from clases.direccion import direccion
 from PIL import Image
 import pymysql
 import pygame
@@ -103,9 +103,9 @@ def main():
                             ciclo=False
                             jugadas=(-1)
 
-                if(juagadas==0):
+                if jugadas==0:
                     nivel=2
-                else(jugadas==(-1)):
+                elif jugadas==-1:
                     gano=False
 
 
@@ -133,3 +133,5 @@ def main():
             if event.type == KEYDOWN:
                 if event.key == K_q:
                     exit()
+
+extraerdatosdelabase()
