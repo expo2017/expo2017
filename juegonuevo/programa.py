@@ -1,3 +1,4 @@
+
 from clases.direccion import direccion
 from PIL import Image
 import pymysql
@@ -93,5 +94,3 @@ def main():
             if event.type == KEYDOWN:
                 if event.key == K_q:
                     exit()
-
-
