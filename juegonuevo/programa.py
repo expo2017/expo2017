@@ -62,55 +62,86 @@ def main():
     nivel=1
     gano=True
     while True:
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.K_SPACE:
+                start=True
+
         while start==True:
 
             if nivel==1:
                 agregarnivelalista(listaenjuego,1)
                 jugadas=10
+                tiempodelnivel=15
+            if nivel==2:
+                agregarnivelalista(listaenjuego,2)
+                jugadas=15
+                tiempodelnivel=10
+            if nivel==3:
+                agregarnivelalista(listaenjuego,3)
+                jugadas=20
+                tiempodelnivel= 5
 
-                while jugadas>0:
-                    variablerandom=random(0,len(listaenjuego))
-                    fondo = pygame.image.load(listadedatos[variablerandom].fotodireccion).convert()
-                    screen.blit(fondo, (0, 0))  # Indicamos la posicion de las "Surface" sobre la ventana
-                    pygame.display.flip()  # se muestran lo cambios en pantalla
-                    tiempo=10
-                    ciclo=True
+            #ciclo
+            while jugadas > 0 and gano == True:
+                variablerandom = random(0, len(listaenjuego))
+                fondo = pygame.image.load(listadedatos[variablerandom].fotodireccion).convert()
+                screen.blit(fondo, (0, 0))  # Indicamos la posicion de las "Surface" sobre la ventana
+                pygame.display.flip()  # se muestran lo cambios en pantalla
+                tiempo = tiempodelnivel
+                ciclo = True
 
-                    while ciclo==True:
-                        tiempo=tiempo-0.95
-                        if():#recibealgo
-                            if(listaenjuego[variablerandom].botonarriba==  "recibio"):
-                                puntos=puntos+1
-                                jugadas=jugadas-1
-                                tiempo=0
-                                ciclo=False
-                            if (listaenjuego[variablerandom].botonabajo ==  " recibio"):
-                                puntos=puntos+1
-                                jugadas =jugadas-1
-                                tiempo=0
-                                ciclo=False
-                            if (listaenjuego[variablerandom].botonderecha ==   "recibio"):
-                                puntos=puntos+1
-                                jugadas=jugadas-1
-                                tiempo=0
-                                ciclo=False
-                            if (listaenjuego[variablerandom].botonizquierda ==  "recibio"):
-                                puntos=puntos+1
-                                jugadas=jugadas-1
-                                tiempo=0
-                                ciclo=False
-                        if tiempo==0:
-                            ciclo=False
-                            jugadas=(-1)
+                while ciclo == True:
+                    if tiempo == 0:
+                        ciclo = False
+                        jugadas = (-1)
 
-                if jugadas==0:
-                    nivel=2
-                elif jugadas==-1:
-                    gano=False
+                    tiempo = tiempo - 0.95
+                    for event in pygame.event.get():
+                        if event.type == pygame.K_UP:
+                            if listadedatos[variablerandom].botonarriba == 1:
+                                puntos = puntos + 1
+                                jugadas = jugadas - 1
+                                tiempo = 0
+                                ciclo = False
+                            else:
+                                gano = False
+                        if event.type == pygame.K_DOWN:
+                            if listadedatos[variablerandom].botonabajo == 1:
+                                puntos = puntos + 1
+                                jugadas = jugadas - 1
+                                tiempo = 0
+                                ciclo = False
+                            else:
+                                gano = False
+                        if event.type == pygame.K_RIGHT:
+                            if listadedatos[variablerandom].botonderecha == 1:
+                                puntos = puntos + 1
+                                jugadas = jugadas - 1
+                                tiempo = 0
+                                ciclo = False
+                            else:
+                                gano = False
+                        if event.type == pygame.K_LEFT:
+                            if listadedatos[variablerandom].botonaizquierda == 1:
+                                puntos = puntos + 1
+                                jugadas = jugadas - 1
+                                tiempo = 0
+                                ciclo = False
+                            else:
+                                gano = False
+            #findelciclo
+            if nivel == 1 and gano == True and jugadas == 0:
+                nivel=2
+            if nivel == 2 and gano == True and jugadas == 0:
+                nivel=3
+            if nivel==3 and gano==True and jugadas==0:
+                #muestra la pantalla ganoo
+            if gano==false:
+                #muestralapantallaperdio
 
 
-            if gano==False:
-                start==False
 
 
 
