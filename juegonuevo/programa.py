@@ -82,7 +82,7 @@ def main():
                 agregarnivelalista(listaenjuego,3)
                 jugadas=20
                 tiempodelnivel= 5
-
+            ##holaaa
             #ciclo
             while jugadas > 0 and gano == True:
                 variablerandom = random(0, len(listaenjuego))
