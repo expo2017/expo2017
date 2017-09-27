@@ -18,12 +18,19 @@ def guardarimagenenbd(rutafoto,id):#inserts de las rutas
     c.execute(consulta)
 
 def tomarfoto():
+    numero=0
     pygame.camera.init()
     print(pygame.camera.list_cameras())
     cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
+    c = db.cursor()
+    consulta = "select count(idpersona)from persona; "
+    c.execute(consulta)
+    for item in c:
+        nuemero=item
     cam.start()
     img = cam.get_image()
-    #funcionguardardentrodeestoconuncountdefototomada
+    direccionpersona="/home/pi/Pictures/fotopersona" +numero+".jpg"
+    pygame.image.save(img,direccionpersona)
     pygame.camera.quit()
 
 def extraerdatosdelabase():
@@ -49,7 +56,7 @@ def agregarnivelalista(lista,nivel):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((1021, 765), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1021, 765))  #pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
     background = pygame.Surface(screen.get_size())
     background = background.convert()
@@ -63,10 +70,10 @@ def main():
     gano=True
     while True:
 
-
-        for event in pygame.event.get():
-            if event.type == pygame.K_SPACE:
-                start=True
+        teclas=pygame.key.get_pressed()
+        if teclas[pygame.K_TAB]:
+            print("hola")
+            start=True
 
         while start==True:
 
@@ -78,15 +85,16 @@ def main():
                 agregarnivelalista(listaenjuego,2)
                 jugadas=15
                 tiempodelnivel=10
-            if nivel==3:
+            """if nivel==3:
                 agregarnivelalista(listaenjuego,3)
                 jugadas=20
-                tiempodelnivel= 5
+                tiempodelnivel= 5"""
             ##holaaa
             #ciclo
             while jugadas > 0 and gano == True:
-                variablerandom = random(0, len(listaenjuego))
-                fondo = pygame.image.load(listadedatos[variablerandom].fotodireccion).convert()
+                longitud=len(listaenjuego)
+                variablerandom = random.randint(0, longitud)
+                fondo = pygame.image.load(listaenjuego[variablerandom].fotodireccion).convert()
                 screen.blit(fondo, (0, 0))  # Indicamos la posicion de las "Surface" sobre la ventana
                 pygame.display.flip()  # se muestran lo cambios en pantalla
                 tiempo = tiempodelnivel
@@ -136,10 +144,10 @@ def main():
                 nivel=2
             if nivel == 2 and gano == True and jugadas == 0:
                 nivel=3
-            if nivel==3 and gano==True and jugadas==0:
+            """if nivel==3 and gano==True and jugadas==0:
                 #muestra la pantalla ganoo
             if gano==false:
-                #muestralapantallaperdio
+                #muestralapantallaperdio"""
 
 
 
@@ -165,4 +173,4 @@ def main():
                 if event.key == K_q:
                     exit()
 
-extraerdatosdelabase()
+main()
