@@ -16,7 +16,7 @@ def main():
         # Fill background
         background = pygame.Surface(screen.get_size())
         background = background.convert()
-        background.fill((204, 51 , 0))
+        background.fill((240, 40 , 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
         for event in pygame.event.get():

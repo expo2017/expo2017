@@ -142,7 +142,7 @@ def fondodecolor(screen,opcion):
     if opcion==4:#rojo
         background = pygame.Surface(screen.get_size())
         background = background.convert()
-        background.fill((204, 51, 0))
+        background.fill((240, 40, 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
 
@@ -201,15 +201,18 @@ def main():
                 juegonuevo.gano=comprobarrespuesta(juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom])
                 juegonuevo.nivelactual.jugadas-=1
 
-                fondodecolor(screen,3)
-                pygame.time.delay(1000)
+                if juegonuevo.gano==True:
+                    fondodecolor(screen,3)
+                    pygame.time.delay(300)
 
 
 
             if juegonuevo.gano==False:
-                fondodecolor(screen, 3)
+                fondodecolor(screen, 4)
                 pygame.time.delay(1000)
+
                 abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/perdiste.jpg",0,0)
+                pygame.time.delay(1000)
                 juegonuevo.setstart(False)
 
             if juegonuevo.nivelactual.jugadas==0:
