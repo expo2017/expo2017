@@ -60,6 +60,58 @@ def agregarnivelalista(lista, n):
             lista.append(item)
 
 
+
+def abrirventana():
+    pygame.init()
+    screen = pygame.display.set_mode((1021, 765))  # pygame.FULLSCREEN)
+    pygame.display.set_caption("Not Not")
+    background = pygame.Surface(screen.get_size())
+    background = background.convert()
+    background.fill((255, 255, 255))
+    screen.blit(background, (0, 0))
+
+
+def abrirfoto(screen,ruta,cord1,cord2):
+    fondo = pygame.image.load(ruta).convert()
+    screen.blit(fondo, (cord1,cord2))  # Indicamos la posicion de las "Surface" sobre la ventana
+    pygame.display.flip()  # se muestran lo cambios en pantalla
+
+def comprobarrespuesta(tiempo,direccion1):
+    while tiempo>=0:
+        if tiempo==0:
+            return False
+        tiempo=tiempo*0.95
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+            if event.type==pygame.KEYDOWN:
+                if event.key == K_q:
+                    exit()
+                if event.key == K_UP:
+                    if direccion1.botonarriba == 1:
+                        return True
+                    else:
+                        return False
+                if event.key == K_DOWN:
+                    if direccion1.botonabajo == 1:
+                        return True
+                    else:
+                        return False
+                if event.key == K_LEFT:
+                    if direccion1.botonizquierda == 1:
+                        return True
+                    else:
+                        return False
+                if event.key == K_RIGHT:
+                    if direccion1.botonderecha == 1:
+                        return True
+                    else:
+                        return False
+
+
+
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((1021, 765))  #pygame.FULLSCREEN)
@@ -100,7 +152,7 @@ def main():
             while jugadas > 0 and gano == True:
                 longitud = len(listaenjuego)-1
                 variablerandom = random.randrange(0, longitud, longitud)
-                direcciondefoto=listaenjuego[1].fotodireccion
+                direcciondefoto=listaenjuego[variablerandom].fotodireccion
                 fondo = pygame.image.load(direcciondefoto).convert()
                 screen.blit(fondo, (0, 0))  # Indicamos la posicion de las "Surface" sobre la ventana
                 pygame.display.flip()  # se muestran lo cambios en pantalla
@@ -110,10 +162,6 @@ def main():
                 while ciclo == True:
                     if tiempo == 0:
                         ciclo = False
-                        jugadas = (-1)
-                    teclas = pygame.key.get_pressed()
-                    if teclas[pygame.K_TAB]:
-                        start = True
 
                     tiempo = tiempo - 0.95
                     opcion=pygame.key.get_pressed()
