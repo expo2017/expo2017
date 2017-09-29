@@ -70,13 +70,13 @@ def comprobarrespuesta(tiempo, direccion1):
     while tiempo >= 0:
         if tiempo == 0:
             return False
-        tiempo = tiempo * 0.95
+        pygame.time.delay(1000)
+        tiempo-=1
+        print(tiempo)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == K_q:
-                    exit()
                 if event.key == K_UP:
                     if direccion1.botonarriba == 1:
                         return True
@@ -97,6 +97,9 @@ def comprobarrespuesta(tiempo, direccion1):
                         return True
                     else:
                         return False
+                if event.key == K_ESCAPE:
+                    exit()
+                    pygame.quit()
 
 def crearniveles(juego1):
     nivel1=nivel()
@@ -117,33 +120,61 @@ def crearniveles(juego1):
     nivel3.setjugadas(20)
     juego1.setnivel(nivel3)
 
+def fondodecolor(screen,opcion):
+    if opcion==1:#blanco
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((255, 255, 255))
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
+    if opcion==2:#negro
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((0, 0, 0))
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
+    if opcion==3:#verde
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((0, 204, 0))
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
+    if opcion==4:#rojo
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((204, 51, 0))
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
+
+
+
+
 def main():
     extraerdatosdelabase()
     pygame.init()
-    screen = pygame.display.set_mode((1360,768),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1360,768))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
-    background = pygame.Surface(screen.get_size())
-    background = background.convert()
-    background.fill((255, 255, 255))
-    screen.blit(background, (0, 0))
+
     juegonuevo=juego()
     crearniveles(juegonuevo)
 
     while True:
-
-        abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/acercate1.png",0,0)
-        pygame.display.flip()
-        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/acercate2.png",0,0)
-        pygame.display.flip()
+        fondodecolor(screen, 1)
+        abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/acercate1.png",150,0)
+        pygame.time.delay(1000)
+        fondodecolor(screen, 2)
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/acercate2.png",150,0)
+        pygame.time.delay(1000)
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
-                    print("hola")
+                    fondodecolor(screen, 1)
                     juegonuevo.setstart(True)
                     juegonuevo.setnivelactual(juego.niveles[0])
                 if event.key == K_ESCAPE:
                     exit()
+                    pygame.quit()
             if event.type == pygame.QUIT:
                 pygame.quit()
 
@@ -161,18 +192,25 @@ def main():
             agregarnivelalista(juegonuevo.listadedirecciones,juegonuevo.nivelactual.id)
 
             while juegonuevo.nivelactual.jugadas>0 and juegonuevo.gano==True:
-                longitud = len(juegonuevo.listadedirecciones) - 1
-                print(longitud)
+                longitud = len(juegonuevo.listadedirecciones)-1
                 variablerandom = random.randint(0, longitud)
                 direcciondefoto = juegonuevo.listadedirecciones[variablerandom].fotodireccion
+                fondodecolor(screen,1)
                 abrirfoto(screen,direcciondefoto,0,0)
 
                 juegonuevo.gano=comprobarrespuesta(juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom])
                 juegonuevo.nivelactual.jugadas-=1
 
+                fondodecolor(screen,3)
+                pygame.time.delay(1000)
+
+
+
             if juegonuevo.gano==False:
-               abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/perdiste.jpg",0,0)
-               juegonuevo.setstart(False)
+                fondodecolor(screen, 3)
+                pygame.time.delay(1000)
+                abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/perdiste.jpg",0,0)
+                juegonuevo.setstart(False)
 
             if juegonuevo.nivelactual.jugadas==0:
                 idaux=juegonuevo.nivelactual.id+1
