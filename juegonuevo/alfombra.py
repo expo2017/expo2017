@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import pyautogui
 
 GPIO.setmode(GPIO.BCM)
 
@@ -11,10 +12,12 @@ GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)#start
 
 
 while True:
-    input_state = GPIO.input(18)
+    input_state = GPIO.input(26)
     if input_state == True:
+        press('left')
+        print("se presiono izquierda")
          #Lo que tengas que hacer
     time.sleep(0.2)
 
 
-PyAutoGUI
+
