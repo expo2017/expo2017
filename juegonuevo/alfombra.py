@@ -17,6 +17,18 @@ while True:
         #press('left')
         print("se presiono izquierda")
          #Lo que tengas que hacer
+    input_state = GPIO.input(13)
+    if input_state == False:
+        print("se presiono abajo")
+
+    input_state = GPIO.input(6)
+    if input_state == False:
+        print("se presiono arriba")
+
+    input_state = GPIO.input(5)
+    if input_state == False:
+        print("se presiono derecha")
+
     time.sleep(0.2)
 
 
