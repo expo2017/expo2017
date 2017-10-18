@@ -19,17 +19,24 @@ while True:
          #Lo que tengas que hacer
     input_state = GPIO.input(13)
     if input_state == False:
+        # press('down')
         print("se presiono abajo")
 
     input_state = GPIO.input(6)
     if input_state == False:
+        # press('up')
         print("se presiono arriba")
 
     input_state = GPIO.input(5)
     if input_state == False:
+        # press('right')
         print("se presiono derecha")
+    input_state = GPIO.input(16)
+    if input_state == False:
+        # press('tab')
+        print("se presiono start")
 
-    time.sleep(0.2)
+    time.sleep(1.4)
 
 
 
