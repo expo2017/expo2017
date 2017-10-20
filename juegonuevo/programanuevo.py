@@ -155,8 +155,7 @@ def main():
     screen = pygame.display.set_mode((1360,768))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
 
-    juegonuevo=juego()
-    crearniveles(juegonuevo)
+
 
     while True:
         fondodecolor(screen, 1)
@@ -166,9 +165,12 @@ def main():
         abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/acercate2.png",150,0)
         pygame.time.delay(1000)
 
+
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
+                    juegonuevo = juego()
+                    crearniveles(juegonuevo)
                     fondodecolor(screen, 1)
                     juegonuevo.setstart(True)
                     juegonuevo.setnivelactual(juego.niveles[0])
