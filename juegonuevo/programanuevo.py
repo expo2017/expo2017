@@ -63,7 +63,7 @@ def agregarnivelalista(lista, n):
 def abrirfoto(screen, ruta, cord1, cord2):
     fondo = pygame.image.load(ruta).convert()
     screen.blit(fondo, (cord1, cord2))  # Indicamos la posicion de las "Surface" sobre la ventana
-    pygame.display.flip()  # se muestran lo cambios en pantalla
+    pygame.display.update()  # se muestran lo cambios en pantalla
 
 
 def comprobarrespuesta(tiempo, direccion1):
@@ -154,7 +154,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((1360,768))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
-
+    juegonuevo = juego()
+    crearniveles(juegonuevo)
 
 
     while True:
@@ -169,8 +170,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
-                    juegonuevo = juego()
-                    crearniveles(juegonuevo)
                     fondodecolor(screen, 1)
                     juegonuevo.setstart(True)
                     juegonuevo.setnivelactual(juego.niveles[0])
@@ -215,9 +214,9 @@ def main():
 
                 abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/perdiste.jpg",0,0)
                 pygame.time.delay(1000)
-                juegonuevo.setstart(False)
+                juegonuevo.reiniciarjuego()
 
-            if juegonuevo.nivelactual.jugadas==0:
+            if juegonuevo.nivelactual.jugadas == 0:
                 idaux=juegonuevo.nivelactual.id+1
                 for nivel in juegonuevo.niveles:
                     if nivel.id==idaux:
@@ -225,7 +224,7 @@ def main():
 
             if juegonuevo.nivelactual.jugadas==0 and juegonuevo.nivelactual.id==3:
                 abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste.jpg", 0, 0)
-                juegonuevo.setstart(False)
+                juegonuevo.reiniciarjuego()
 
 
 

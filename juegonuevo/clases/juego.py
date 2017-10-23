@@ -19,6 +19,10 @@ class juego (object):
     def setnivelactual(self,n):
         self.nivelactual=n
 
-
+    def reiniciarjuego(self):
+        self.puntos=0
+        self.start=False
+        self.gano=True
+        self.nivelactual=None
 
 
