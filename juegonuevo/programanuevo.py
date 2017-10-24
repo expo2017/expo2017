@@ -13,6 +13,7 @@ import pygame.camera
 import sys
 
 db = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="las_chicas", autocommit=True)
+dbs = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="expo_modelo_2017_computacion", autocommit=True)
 listadedatos = []
 
 
@@ -112,14 +113,14 @@ def crearniveles(juego1):#agregardireccion de foto a cada nivel
     nivel2.setid(2)
     nivel2.settiempo(8)
     nivel2.setjugadas(15)
-    nivel1.setfoto("/home/pi/Pictures/fotointerfaz/nivel2.jpg")
+    nivel2.setfoto("/home/pi/Pictures/fotointerfaz/nivel2.jpg")
     juego1.setnivel(nivel2)
 
     nivel3 = nivel()
     nivel3.setid(3)
     nivel3.settiempo(5)
     nivel3.setjugadas(20)
-    nivel1.setfoto("/home/pi/Pictures/fotointerfaz/nivel3.jpg")
+    nivel3.setfoto("/home/pi/Pictures/fotointerfaz/nivel3.jpg")
     juego1.setnivel(nivel3)
 
 def fondodecolor(screen,opcion):
@@ -154,27 +155,29 @@ def fondodecolor(screen,opcion):
 def main():
     extraerdatosdelabase()
     pygame.init()
-    screen = pygame.display.set_mode((1360,768))  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1360,768),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
     juegonuevo = juego()
+    crearniveles(juegonuevo)
+    fondodecolor(screen, 1)
 
 
     while True:
-        fondodecolor(screen, 1)
-        abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/acercate1.png",150,0)
+        abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/presionestart.jpg",150,50)
         pygame.time.delay(1000)
-        fondodecolor(screen, 2)
-        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/acercate2.png",150,0)
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/presionestart1.jpg",150,50)
         pygame.time.delay(1000)
 
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
-                    crearniveles(juegonuevo)
-                    fondodecolor(screen, 1)
                     juegonuevo.setstart(True)
                     juegonuevo.setnivelactual(juego.niveles[0])
+                    print ("jugadas")
+                    print(juegonuevo.nivelactual.jugadas)
+                    abrirfoto(screen,juegonuevo.nivelactual.foto,160,50)
+                    pygame.time.delay(1000)
                     # imagendeempiezaeljuego
                     #mostrarimagendenivel1
                 if event.key == K_ESCAPE:
@@ -192,33 +195,41 @@ def main():
                 longitud = len(juegonuevo.listadedirecciones)-1
                 variablerandom = random.randint(0, longitud)
                 direcciondefoto = juegonuevo.listadedirecciones[variablerandom].fotodireccion
-                fondodecolor(screen,1)
-                abrirfoto(screen,direcciondefoto,0,0)
+                abrirfoto(screen,direcciondefoto,160,60)
 
                 juegonuevo.gano=comprobarrespuesta(juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom])
                 juegonuevo.nivelactual.jugadas-=1
 
                 if juegonuevo.gano==True:
                     fondodecolor(screen,3)
+                    abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/correcto1.jpg",160,55)
+                    juegonuevo.setpuntos()
                     pygame.time.delay(300)
+                    fondodecolor(screen, 1)
 
             if juegonuevo.gano == False:
+                print(juegonuevo.puntos)
                 fondodecolor(screen, 4)
+                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.png", 160, 55)
                 pygame.time.delay(1000)
-
                 abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste.jpg", 0, 0)
                 pygame.time.delay(1000)
                 juegonuevo.reiniciarjuego()
+                fondodecolor(screen, 1)
 
             if juegonuevo.nivelactual.jugadas==0:
                 idaux=juegonuevo.nivelactual.id+1
                 for nivel in juegonuevo.niveles:
                     if nivel.id==idaux:
                         juegonuevo.nivelactual=nivel
+                        abrirfoto(screen, juegonuevo.nivelactual.foto, 160, 50)
+                        pygame.time.delay(1000)
+
                 #mostrarfotodecambiodenivel
 
                 if juegonuevo.nivelactual.id==3:
                     abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste.jpg", 0, 0)
+                    pygame.time.delay(1000)
                     juegonuevo.reiniciarjuego()
 
 

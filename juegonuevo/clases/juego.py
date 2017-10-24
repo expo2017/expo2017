@@ -16,6 +16,7 @@ class juego (object):
         self.gano=g
     def setnivel(self,n):
         self.niveles.append(n)
+
     def setnivelactual(self,n):
         self.nivelactual=n
 

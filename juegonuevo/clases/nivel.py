@@ -2,7 +2,7 @@ class nivel (object):
     id=None
     tiempo=None
     jugadas=None
-    foto=None
+    foto=""
 
     def setid (self,idr):
         self.id=idr
