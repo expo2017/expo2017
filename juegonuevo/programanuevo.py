@@ -67,9 +67,11 @@ def abrirfoto(screen, ruta, cord1, cord2):
     pygame.display.update()  # se muestran lo cambios en pantalla
 
 
-def comprobarrespuesta(tiempo, direccion1):
+def comprobarrespuesta(screen,tiempo, direccion1):
     while tiempo >= 0:
         if tiempo == 0:
+            abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/acercate1.png",0,0)
+            pygame.time.delay(1000)
             return False
         pygame.time.delay(1000)
         tiempo-=1
@@ -79,23 +81,31 @@ def comprobarrespuesta(tiempo, direccion1):
             if event.type == pygame.KEYDOWN:
                 if event.key == K_UP:
                     if direccion1.botonarriba == 1:
+                        fondodecolor(screen,3)
                         return True
                     else:
+                        fondodecolor(screen,4)
                         return False
                 if event.key == K_DOWN:
                     if direccion1.botonabajo == 1:
+                        fondodecolor(screen, 3)
                         return True
                     else:
+                        fondodecolor(screen, 4)
                         return False
                 if event.key == K_LEFT:
                     if direccion1.botonizquierda == 1:
+                        fondodecolor(screen, 3)
                         return True
                     else:
+                        fondodecolor(screen, 4)
                         return False
                 if event.key == K_RIGHT:
                     if direccion1.botonderecha == 1:
+                        fondodecolor(screen, 3)
                         return True
                     else:
+                        fondodecolor(screen, 4)
                         return False
                 if event.key == K_ESCAPE:
                     exit()
@@ -142,6 +152,8 @@ def fondodecolor(screen,opcion):
         background.fill((0, 204, 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/correcto1.jpg", 160, 55)
+        pygame.time.delay(1000)
 
     if opcion==4:#rojo
         background = pygame.Surface(screen.get_size())
@@ -149,6 +161,8 @@ def fondodecolor(screen,opcion):
         background.fill((240, 40, 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.png", 160, 55)
+        pygame.time.delay(1000)
 
 
 
@@ -192,18 +206,16 @@ def main():
             while juegonuevo.nivelactual.jugadas>0 and juegonuevo.gano==True:
                 longitud = len(juegonuevo.listadedirecciones)-1
                 variablerandom = random.randint(0, longitud)
+                fondodecolor(screen,1)
                 direcciondefoto = juegonuevo.listadedirecciones[variablerandom].fotodireccion
                 abrirfoto(screen,direcciondefoto,160,60)
 
-                juegonuevo.gano=comprobarrespuesta(juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom])
+                juegonuevo.gano=comprobarrespuesta(screen,juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom])
                 juegonuevo.nivelactual.jugadas-=1
 
                 if juegonuevo.gano==True:
-                    fondodecolor(screen,3)
-                    abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/correcto1.jpg",160,55)
                     juegonuevo.setpuntos()
-                    pygame.time.delay(300)
-                    fondodecolor(screen, 1)
+
 
 
             if juegonuevo.nivelactual.jugadas==0:
@@ -225,9 +237,6 @@ def main():
             if juegonuevo.gano == False:
                 print(juegonuevo.puntos)
                 #insertscore(juegonuevo.puntos)
-                fondodecolor(screen, 4)
-                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.png", 160, 55)
-                pygame.time.delay(1000)
                 abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste.jpg", 0, 0)
                 pygame.time.delay(1000)
                 fondodecolor(screen, 1)
