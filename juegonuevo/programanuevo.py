@@ -17,8 +17,8 @@ dbs = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="e
 listadedatos = []
 
 
-def guardarimagenenbd(rutafoto, id):  # inserts de las rutas
-    c = db.cursor()
+def insertscore(score):  # inserts de las rutas
+    c = dbs.cursor()
     consulta = "insert into persona values(" + "null," + " ' " + rutafoto + " ' " + "," + str(id) + ");"
     c.execute(consulta)
 
@@ -64,7 +64,7 @@ def agregarnivelalista(lista, n):
 def abrirfoto(screen, ruta, cord1, cord2):
     fondo = pygame.image.load(ruta).convert()
     screen.blit(fondo, (cord1, cord2))  # Indicamos la posicion de las "Surface" sobre la ventana
-    pygame.display.flip()  # se muestran lo cambios en pantalla
+    pygame.display.update()  # se muestran lo cambios en pantalla
 
 
 def comprobarrespuesta(tiempo, direccion1):

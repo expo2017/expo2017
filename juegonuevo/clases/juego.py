@@ -1,3 +1,5 @@
+from .nivel import nivel
+
 class juego (object):
     puntos=0
     listadedirecciones=[]
@@ -18,7 +20,12 @@ class juego (object):
         self.niveles.append(n)
 
     def setnivelactual(self,n):
-        self.nivelactual=n
+        nivelaux=nivel()
+        nivelaux.setid(n.id)
+        nivelaux.settiempo(n.tiempo)
+        nivelaux.setjugadas(n.jugadas)
+        nivelaux.setfoto(n.foto)
+        self.nivelactual=nivelaux
 
     def reiniciarjuego(self):
         self.puntos=0
