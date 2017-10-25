@@ -31,6 +31,9 @@ class juego (object):
         self.puntos=0
         self.start=False
         self.gano=True
+        self.listadedirecciones=None
+        self.listadedirecciones=[]
+        #self.nivelactual=self.niveles[0]
 
 
 

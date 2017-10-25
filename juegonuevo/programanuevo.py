@@ -19,7 +19,7 @@ listadedatos = []
 
 def insertscore(score):  # inserts de las rutas
     c = dbs.cursor()
-    consulta = "insert into persona values(" + "null," + " ' " + rutafoto + " ' " + "," + str(id) + ");"
+    consulta = "insert into Score values( NULL,5,'HightScore',"+ str(score)+")"
     c.execute(consulta)
 
 
@@ -174,8 +174,7 @@ def main():
                 if event.key == K_TAB:
                     juegonuevo.setstart(True)
                     juegonuevo.setnivelactual(juego.niveles[0])
-                    print ("jugadas")
-                    print(juegonuevo.nivelactual.jugadas)
+                    fondodecolor(screen, 1)
                     abrirfoto(screen,juegonuevo.nivelactual.foto,160,50)
                     pygame.time.delay(1000)
                     # imagendeempiezaeljuego
@@ -209,19 +208,20 @@ def main():
 
             if juegonuevo.gano == False:
                 print(juegonuevo.puntos)
+                #insertscore(juegonuevo.puntos)
                 fondodecolor(screen, 4)
                 abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.png", 160, 55)
                 pygame.time.delay(1000)
                 abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste.jpg", 0, 0)
                 pygame.time.delay(1000)
-                juegonuevo.reiniciarjuego()
                 fondodecolor(screen, 1)
+                juegonuevo.reiniciarjuego()
 
             if juegonuevo.nivelactual.jugadas==0:
                 idaux=juegonuevo.nivelactual.id+1
                 for nivel in juegonuevo.niveles:
                     if nivel.id==idaux:
-                        juegonuevo.nivelactual=nivel
+                        juegonuevo.setnivelactual(nivel)
                         abrirfoto(screen, juegonuevo.nivelactual.foto, 160, 50)
                         pygame.time.delay(1000)
 
@@ -230,6 +230,8 @@ def main():
                 if juegonuevo.nivelactual.id==3:
                     abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste.jpg", 0, 0)
                     pygame.time.delay(1000)
+                    print(juegonuevo.puntos)
+                    #insertscore(juegonuevo.puntos)
                     juegonuevo.reiniciarjuego()
 
 
