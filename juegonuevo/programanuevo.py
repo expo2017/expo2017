@@ -170,20 +170,23 @@ def fondodecolor(screen,opcion):
 def main():
     extraerdatosdelabase()
     pygame.init()
-    screen = pygame.display.set_mode((1360,768),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1360,768))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
+    reloj = pygame.time.Clock()
+    reloj.tick(60)
     juegonuevo = juego()
     crearniveles(juegonuevo)
     fondodecolor(screen, 1)
-
+    frames_totales = 0
+    segundo = 0
 
     while True:
         abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/presionestart.jpg",150,50)
-        pygame.time.delay(1000)
+        if frames_totales % 60 == 0:
+            segundo += 1
         abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/presionestart1.jpg",150,50)
-        pygame.time.delay(1000)
-
-
+        frames_totales += 1
+        print(segundo)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
@@ -191,7 +194,6 @@ def main():
                     juegonuevo.setnivelactual(juego.niveles[0])
                     fondodecolor(screen, 1)
                     abrirfoto(screen,juegonuevo.nivelactual.foto,160,50)
-                    pygame.time.delay(1000)
                 if event.key == K_ESCAPE:
                     exit()
                     pygame.quit()
@@ -227,7 +229,7 @@ def main():
                         pygame.time.delay(1000)
 
             if juegonuevo.nivelactual.id == 3 and juegonuevo.nivelactual.jugadas==0:
-                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste.jpg", 0, 0)
+                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste_prueba.jpg", 150, 150)
                 pygame.time.delay(2000)
                 print(juegonuevo.puntos)
                 # insertscore(juegonuevo.puntos)
@@ -237,7 +239,7 @@ def main():
             if juegonuevo.gano == False:
                 print(juegonuevo.puntos)
                 #insertscore(juegonuevo.puntos)
-                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste.jpg", 0, 0)
+                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste.jpg", 150, 150)
                 pygame.time.delay(1000)
                 fondodecolor(screen, 1)
                 juegonuevo.reiniciarjuego()
