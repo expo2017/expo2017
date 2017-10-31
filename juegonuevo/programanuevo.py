@@ -68,13 +68,7 @@ def abrirfoto(screen, ruta, cord1, cord2):
 
 
 def comprobarrespuesta(screen,tiempo, direccion1):
-    while tiempo >= 0:
-        if tiempo == 0:
-            abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/acercate1.png",0,0)
-            pygame.time.delay(1000)
-            return False
-        pygame.time.delay(1000)
-        tiempo-=1
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -184,7 +178,7 @@ def main():
         abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/presionestart.jpg",150,50)
         if frames_totales % 60 == 0:
             segundo += 1
-        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/presionestart1.jpg",150,50)
+            abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/presionestart1.jpg",150,50)
         frames_totales += 1
         print(segundo)
         for event in pygame.event.get():
@@ -212,7 +206,8 @@ def main():
                 direcciondefoto = juegonuevo.listadedirecciones[variablerandom].fotodireccion
                 abrirfoto(screen,direcciondefoto,160,60)
 
-                juegonuevo.gano=comprobarrespuesta(screen,juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom])
+
+                juegonuevo.gano=comprobarrespuesta(screen,juegonuevo.nivelactual.tiempo,juegonuevo.listadedirecciones[variablerandom],reloj)
                 juegonuevo.nivelactual.jugadas-=1
 
                 if juegonuevo.gano==True:
