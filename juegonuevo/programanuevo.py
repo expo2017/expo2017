@@ -188,13 +188,12 @@ def main():
 
     while True:
         abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/presionestart.jpg",150,50)
-        if frames_totales % 60 == 0:
-            segundo += 1
-            abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/presionestart1.jpg",150,50)
-        frames_totales += 1
-        print(segundo)
+        pygame.time.delay(500)
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/presionestart1.jpg",150,50)
+        pygame.time.delay(500)
+
         for event in pygame.event.get():
-            print("hola")
+
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
                     juegonuevo.setstart(True)
