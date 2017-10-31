@@ -1,10 +1,15 @@
 import pygame
 from pygame.locals import *
 
+def abrirfoto(screen, ruta, cord1, cord2):
+    fondo = pygame.image.load(ruta).convert()
+    screen.blit(fondo, (cord1, cord2))  # Indicamos la posicion de las "Surface" sobre la ventana
+    pygame.display.update()  # se muestran lo cambios en pantalla
+
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((100, 70))  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((120, 70))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
     reloj = pygame.time.Clock()
 
@@ -14,6 +19,7 @@ def main():
     reloj.tick(60)
 
     while True:
+        
 
         for event in pygame.event.get():
             print("hola")

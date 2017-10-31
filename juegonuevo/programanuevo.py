@@ -158,16 +158,25 @@ def fondodecolor(screen,opcion):
         background.fill((0, 204, 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
-        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/correcto1.jpg", 160, 55)
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/correcto.jpg", 160, 55)
         pygame.time.delay(1000)
 
-    if opcion==4:#rojo
+    if opcion==4:#rojoincorrecto
         background = pygame.Surface(screen.get_size())
         background = background.convert()
         background.fill((240, 40, 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
-        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.png", 160, 55)
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.jpg", 160, 55)
+        pygame.time.delay(1000)
+
+    if opcion==5:#rojoseacaboeltiempo
+        background = pygame.Surface(screen.get_size())
+        background = background.convert()
+        background.fill((240, 40, 0))
+        screen.blit(background, (0, 0))
+        pygame.display.flip()
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.jpg", 160, 55)
         pygame.time.delay(1000)
 
 
