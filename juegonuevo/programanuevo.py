@@ -67,43 +67,55 @@ def abrirfoto(screen, ruta, cord1, cord2):
     pygame.display.update()  # se muestran lo cambios en pantalla
 
 
-def comprobarrespuesta(screen,tiempo, direccion1):
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == K_UP:
-                    if direccion1.botonarriba == 1:
-                        fondodecolor(screen,3)
-                        return True
-                    else:
-                        fondodecolor(screen,4)
-                        return False
-                if event.key == K_DOWN:
-                    if direccion1.botonabajo == 1:
-                        fondodecolor(screen, 3)
-                        return True
-                    else:
-                        fondodecolor(screen, 4)
-                        return False
-                if event.key == K_LEFT:
-                    if direccion1.botonizquierda == 1:
-                        fondodecolor(screen, 3)
-                        return True
-                    else:
-                        fondodecolor(screen, 4)
-                        return False
-                if event.key == K_RIGHT:
-                    if direccion1.botonderecha == 1:
-                        fondodecolor(screen, 3)
-                        return True
-                    else:
-                        fondodecolor(screen, 4)
-                        return False
-                if event.key == K_ESCAPE:
-                    exit()
+def comprobarrespuesta(screen,tiempo, direccion1,reloj):
+    variableaux=True
+    frames_totales = 0
+    segundo = 0
+        while variableaux==True:
+            if segundo== tiempo:
+                variableaux==False
+                #mostrarimagenseacaboeltiempo
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_UP:
+                        if direccion1.botonarriba == 1:
+                            fondodecolor(screen,3)
+                            return True
+                        else:
+                            fondodecolor(screen,4)
+                            return False
+                    if event.key == K_DOWN:
+                        if direccion1.botonabajo == 1:
+                            fondodecolor(screen, 3)
+                            return True
+                        else:
+                            fondodecolor(screen, 4)
+                            return False
+                    if event.key == K_LEFT:
+                        if direccion1.botonizquierda == 1:
+                            fondodecolor(screen, 3)
+                            return True
+                        else:
+                            fondodecolor(screen, 4)
+                            return False
+                    if event.key == K_RIGHT:
+                        if direccion1.botonderecha == 1:
+                            fondodecolor(screen, 3)
+                            return True
+                        else:
+                            fondodecolor(screen, 4)
+                            return False
+                    if event.key == K_ESCAPE:
+                        exit()
+                        pygame.quit()
+            reloj.tick(60)
+
+            if frames_totales % 60 == 0:
+                segundo += 1
+                print(segundo)
+            frames_totales += 1
 
 def crearniveles(juego1):#agregardireccion de foto a cada nivel
     nivel1=nivel()
