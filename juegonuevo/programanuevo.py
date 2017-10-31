@@ -68,54 +68,54 @@ def abrirfoto(screen, ruta, cord1, cord2):
 
 
 def comprobarrespuesta(screen,tiempo, direccion1,reloj):
-    variableaux=True
+    aux=True
     frames_totales = 0
     segundo = 0
-        while variableaux==True:
-            if segundo== tiempo:
-                variableaux==False
+    while aux==True:
+           if segundo== tiempo:
+               aux==False
                 #mostrarimagenseacaboeltiempo
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == K_UP:
-                        if direccion1.botonarriba == 1:
-                            fondodecolor(screen,3)
-                            return True
-                        else:
-                            fondodecolor(screen,4)
-                            return False
-                    if event.key == K_DOWN:
-                        if direccion1.botonabajo == 1:
-                            fondodecolor(screen, 3)
-                            return True
-                        else:
-                            fondodecolor(screen, 4)
-                            return False
-                    if event.key == K_LEFT:
-                        if direccion1.botonizquierda == 1:
-                            fondodecolor(screen, 3)
-                            return True
-                        else:
-                            fondodecolor(screen, 4)
-                            return False
-                    if event.key == K_RIGHT:
-                        if direccion1.botonderecha == 1:
-                            fondodecolor(screen, 3)
-                            return True
-                        else:
-                            fondodecolor(screen, 4)
-                            return False
-                    if event.key == K_ESCAPE:
-                        exit()
-                        pygame.quit()
-            reloj.tick(60)
+           for event in pygame.event.get():
+               if event.type == pygame.QUIT:
+                   pygame.quit()
+               if event.type == pygame.KEYDOWN:
+                   if event.key == K_UP:
+                       if direccion1.botonarriba == 1:
+                           fondodecolor(screen,3)
+                           return True
+                       else:
+                           fondodecolor(screen,4)
+                           return False
+                   if event.key == K_DOWN:
+                       if direccion1.botonabajo == 1:
+                           fondodecolor(screen, 3)
+                           return True
+                       else:
+                           fondodecolor(screen, 4)
+                           return False
+                   if event.key == K_LEFT:
+                       if direccion1.botonizquierda == 1:
+                           fondodecolor(screen, 3)
+                           return True
+                       else:
+                           fondodecolor(screen, 4)
+                           return False
+                   if event.key == K_RIGHT:
+                       if direccion1.botonderecha == 1:
+                           fondodecolor(screen, 3)
+                           return True
+                       else:
+                           fondodecolor(screen, 4)
+                           return False
+                   if event.key == K_ESCAPE:
+                       exit()
+                       pygame.quit()
+           reloj.tick(60)
 
-            if frames_totales % 60 == 0:
-                segundo += 1
-                print(segundo)
-            frames_totales += 1
+           if frames_totales % 60 == 0:
+               segundo += 1
+               print(segundo)
+           frames_totales += 1
 
 def crearniveles(juego1):#agregardireccion de foto a cada nivel
     nivel1=nivel()
@@ -185,7 +185,7 @@ def fondodecolor(screen,opcion):
 def main():
     extraerdatosdelabase()
     pygame.init()
-    screen = pygame.display.set_mode((1360,768))  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1360,768),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
     reloj = pygame.time.Clock()
     reloj.tick(60)
@@ -209,6 +209,7 @@ def main():
                     juegonuevo.setnivelactual(juego.niveles[0])
                     fondodecolor(screen, 1)
                     abrirfoto(screen,juegonuevo.nivelactual.foto,160,50)
+                    pygame.time.delay(1000)
                 if event.key == K_ESCAPE:
                     exit()
                     pygame.quit()
@@ -241,6 +242,7 @@ def main():
                 for nivel in juegonuevo.niveles:
                     if nivel.id==idaux:
                         juegonuevo.setnivelactual(nivel)
+                        fondodecolor(screen,1)
                         abrirfoto(screen, juegonuevo.nivelactual.foto, 160, 50)
                         pygame.time.delay(1000)
 
