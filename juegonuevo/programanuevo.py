@@ -182,6 +182,7 @@ def main():
         frames_totales += 1
         print(segundo)
         for event in pygame.event.get():
+            print("hola")
             if event.type == pygame.KEYDOWN:
                 if event.key == K_TAB:
                     juegonuevo.setstart(True)
