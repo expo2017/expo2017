@@ -20,6 +20,17 @@ def main():
 
     while True:
 
+        while aux == True:
+            abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste1.jpg", 0, 0)
+            pygame.time.delay(500)
+            abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste2.jpg", 0, 0)
+            pygame.time.delay(500)
+            frames_totales += 1
+            if frames_totales % 60 == 0:
+                segundo += 1
+            if segundo == 3:
+                aux = False
+
         abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/nivel1.jpg",0,0)
         for event in pygame.event.get():
             print("hola")
