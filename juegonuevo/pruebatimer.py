@@ -12,7 +12,6 @@ def main():
     screen = pygame.display.set_mode((120, 70))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
     reloj = pygame.time.Clock()
-
     frames_totales = 0
     segundo = 0
     variable1=False

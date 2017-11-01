@@ -74,6 +74,7 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
     while variableaux==True:
             if segundo== tiempo:
                 fondodecolor(screen,5)
+                pygame.time.delay(500)
                 return False
                 variableaux = False
                 #mostrarimagenseacaboeltiempo
@@ -261,6 +262,7 @@ def main():
                 print(juegonuevo.puntos)
                 # insertscore(juegonuevo.puntos)
                 juegonuevo.reiniciarjuego()
+                fondodecolor(screen, 1)
 
 
             if juegonuevo.gano == False:
