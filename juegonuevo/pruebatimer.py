@@ -9,7 +9,7 @@ def abrirfoto(screen, ruta, cord1, cord2):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((1366,760))  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1366,760), pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
 
     reloj = pygame.time.Clock()
