@@ -70,9 +70,10 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
     variableaux=True
     frames_totales = 0
     segundo = 0
+    tiempo+=1
     abrirfoto(screen, listadetiempo[tiempo], 0, 0)
     while variableaux==True:
-            if segundo== tiempo:
+            if segundo== (tiempo-1):
                 fondodecolor(screen,5)
                 return False
                 variableaux == False
@@ -117,7 +118,6 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
             if frames_totales % 60 == 0:
                 segundo += 1
                 abrirfoto(screen,listadetiempo[tiempo-segundo],0,0)
-                print(segundo)
             frames_totales += 1
 
 def crearniveles(juego1):#agregardireccion de foto a cada nivel
