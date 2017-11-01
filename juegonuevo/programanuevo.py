@@ -269,8 +269,9 @@ def main():
             if juegonuevo.gano == False:
                 print(juegonuevo.puntos)
                 #insertscore(juegonuevo.puntos)
-                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste.jpg", 150, 150)
-                pygame.time.delay(1000)
+                fondodecolor(screen,2)
+                abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste1.jpg",0,0)
+                pygame.time.delay(2000)
                 fondodecolor(screen, 1)
                 juegonuevo.reiniciarjuego()
 
