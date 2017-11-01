@@ -203,6 +203,8 @@ def main():
     juegonuevo = juego()
     crearniveles(juegonuevo)
     fondodecolor(screen, 1)
+    frames_totales = 0
+    segundo = 0
 
     while True:
         abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/presionestart.jpg",150,50)
