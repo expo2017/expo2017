@@ -74,7 +74,7 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
     while variableaux==True:
             if segundo== tiempo:
                 variableaux==False
-                abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/tiempo.jpg",150,50)
+                fondodecolor(screen,5)
                 #mostrarimagenseacaboeltiempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -178,7 +178,7 @@ def fondodecolor(screen,opcion):
         background.fill((240, 40, 0))
         screen.blit(background, (0, 0))
         pygame.display.flip()
-        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.jpg", 160, 55)
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/tiempo.jpg", 160, 55)
         pygame.time.delay(1000)
 
 def cargartiempo():
