@@ -73,8 +73,9 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
     abrirfoto(screen, listadetiempo[tiempo], 0, 0)
     while variableaux==True:
             if segundo== tiempo:
-                variableaux==False
                 fondodecolor(screen,5)
+                return False
+                variableaux == False
                 #mostrarimagenseacaboeltiempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
