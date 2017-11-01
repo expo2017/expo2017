@@ -9,9 +9,9 @@ def abrirfoto(screen, ruta, cord1, cord2):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((120, 70),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1366,760),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
-    abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/1.jpg",1000,700)
+
     reloj = pygame.time.Clock()
     frames_totales = 0
     segundo = 0
@@ -19,8 +19,8 @@ def main():
     reloj.tick(60)
 
     while True:
-        
 
+        abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/nivel1.jpg",0,0)
         for event in pygame.event.get():
             print("hola")
             if event.type == pygame.KEYDOWN:

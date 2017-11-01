@@ -16,6 +16,7 @@ db = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="la
 dbs = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="expo_modelo_2017_computacion", autocommit=True)
 listadedatos = []
 listadetiempo=[]
+
 def insertscore(score):  # inserts de las rutas
     c = dbs.cursor()
     consulta = "insert into Score values( NULL,5,'HightScore',"+ str(score)+")"
