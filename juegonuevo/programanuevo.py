@@ -75,7 +75,7 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
             if segundo== tiempo:
                 fondodecolor(screen,5)
                 return False
-                variableaux == False
+                variableaux = False
                 #mostrarimagenseacaboeltiempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
