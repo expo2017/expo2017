@@ -15,7 +15,7 @@ import sys
 db = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="las_chicas", autocommit=True)
 dbs = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="expo_modelo_2017_computacion", autocommit=True)
 listadedatos = []
-
+listadetiempo=[]
 def insertscore(score):  # inserts de las rutas
     c = dbs.cursor()
     consulta = "insert into Score values( NULL,5,'HightScore',"+ str(score)+")"
@@ -67,55 +67,57 @@ def abrirfoto(screen, ruta, cord1, cord2):
 
 
 def comprobarrespuesta(screen,tiempo, direccion1,reloj):
-    aux=True
+    variableaux=True
     frames_totales = 0
     segundo = 0
-    abrirfoto(screen,lis)
-    while aux==True:
-           if segundo== tiempo:
-               aux==False
+    abrirfoto(screen, listadetiempo[tiempo], 0, 0)
+    while variableaux==True:
+            if segundo== tiempo:
+                variableaux==False
+                abrirfoto(screen,"/home/pi/Pictures/fotointerfaz/tiempo.jpg",150,50)
                 #mostrarimagenseacaboeltiempo
-           for event in pygame.event.get():
-               if event.type == pygame.QUIT:
-                   pygame.quit()
-               if event.type == pygame.KEYDOWN:
-                   if event.key == K_UP:
-                       if direccion1.botonarriba == 1:
-                           fondodecolor(screen,3)
-                           return True
-                       else:
-                           fondodecolor(screen,4)
-                           return False
-                   if event.key == K_DOWN:
-                       if direccion1.botonabajo == 1:
-                           fondodecolor(screen, 3)
-                           return True
-                       else:
-                           fondodecolor(screen, 4)
-                           return False
-                   if event.key == K_LEFT:
-                       if direccion1.botonizquierda == 1:
-                           fondodecolor(screen, 3)
-                           return True
-                       else:
-                           fondodecolor(screen, 4)
-                           return False
-                   if event.key == K_RIGHT:
-                       if direccion1.botonderecha == 1:
-                           fondodecolor(screen, 3)
-                           return True
-                       else:
-                           fondodecolor(screen, 4)
-                           return False
-                   if event.key == K_ESCAPE:
-                       exit()
-                       pygame.quit()
-           reloj.tick(60)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == K_UP:
+                        if direccion1.botonarriba == 1:
+                            fondodecolor(screen,3)
+                            return True
+                        else:
+                            fondodecolor(screen,4)
+                            return False
+                    if event.key == K_DOWN:
+                        if direccion1.botonabajo == 1:
+                            fondodecolor(screen, 3)
+                            return True
+                        else:
+                            fondodecolor(screen, 4)
+                            return False
+                    if event.key == K_LEFT:
+                        if direccion1.botonizquierda == 1:
+                            fondodecolor(screen, 3)
+                            return True
+                        else:
+                            fondodecolor(screen, 4)
+                            return False
+                    if event.key == K_RIGHT:
+                        if direccion1.botonderecha == 1:
+                            fondodecolor(screen, 3)
+                            return True
+                        else:
+                            fondodecolor(screen, 4)
+                            return False
+                    if event.key == K_ESCAPE:
+                        exit()
+                        pygame.quit()
+            reloj.tick(60)
 
-           if frames_totales % 60 == 0:
-               segundo += 1
-               print(segundo)
-           frames_totales += 1
+            if frames_totales % 60 == 0:
+                segundo += 1
+                abrirfoto(screen,listadetiempo[tiempo-segundo],0,0)
+                print(segundo)
+            frames_totales += 1
 
 def crearniveles(juego1):#agregardireccion de foto a cada nivel
     nivel1=nivel()
@@ -179,11 +181,18 @@ def fondodecolor(screen,opcion):
         abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/incorrecto.jpg", 160, 55)
         pygame.time.delay(1000)
 
-
+def cargartiempo():
+    listadetiempo.append("/home/pi/Pictures/fotointerfaz/0.jpg")
+    listadetiempo.append("/home/pi/Pictures/fotointerfaz/1.jpg")
+    listadetiempo.append("/home/pi/Pictures/fotointerfaz/2.jpg")
+    listadetiempo.append("/home/pi/Pictures/fotointerfaz/3.jpg")
+    listadetiempo.append("/home/pi/Pictures/fotointerfaz/4.jpg")
+    listadetiempo.append("/home/pi/Pictures/fotointerfaz/5.jpg")
 
 
 def main():
     extraerdatosdelabase()
+    cargartiempo()
     pygame.init()
     screen = pygame.display.set_mode((1360,768),pygame.FULLSCREEN)  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
