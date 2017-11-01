@@ -9,7 +9,7 @@ def abrirfoto(screen, ruta, cord1, cord2):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((1021,700))  # pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1366,760))  # pygame.FULLSCREEN)
     pygame.display.set_caption("Not Not")
 
     reloj = pygame.time.Clock()
@@ -17,6 +17,7 @@ def main():
     segundo = 0
     variable1=False
     reloj.tick(60)
+    aux=True
 
     while True:
 
@@ -25,12 +26,10 @@ def main():
             pygame.time.delay(500)
             abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste2.jpg", 0, 0)
             pygame.time.delay(500)
-            frames_totales += 1
-            if frames_totales % 60 == 0:
-                segundo += 1
-            if segundo == 3:
+            if frames_totales == 2:
                 aux = False
-            reloj.tick(60)
+            frames_totales += 1
+            print(frames_totales)
 
 
         abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/nivel1.jpg",0,0)

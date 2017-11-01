@@ -259,18 +259,16 @@ def main():
 
             if juegonuevo.nivelactual.id == 3 and juegonuevo.nivelactual.jugadas==0:
                 aux=True
-                while aux==True:
+                while aux == True:
                     abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste1.jpg", 0, 0)
                     pygame.time.delay(500)
                     abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/ganaste2.jpg", 0, 0)
                     pygame.time.delay(500)
-                    frames_totales+=1
-                    if frames_totales % 60 == 0:
-                        segundo+=1
-                    if segundo==3:
-                        aux=False
+                    if frames_totales == 2:
+                        aux = False
+                    frames_totales += 1
+                    print(frames_totales)
 
-                    reloj.tick(60)
                 print(juegonuevo.puntos)
                 # insertscore(juegonuevo.puntos)
                 juegonuevo.reiniciarjuego()
