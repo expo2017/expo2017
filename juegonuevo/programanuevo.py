@@ -16,7 +16,6 @@ db = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="la
 dbs = pymysql.connect(host="172.16.2.250", user="root", password="alumno", db="expo_modelo_2017_computacion", autocommit=True)
 listadedatos = []
 
-
 def insertscore(score):  # inserts de las rutas
     c = dbs.cursor()
     consulta = "insert into Score values( NULL,5,'HightScore',"+ str(score)+")"
@@ -71,6 +70,7 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
     aux=True
     frames_totales = 0
     segundo = 0
+    abrirfoto(screen,lis)
     while aux==True:
            if segundo== tiempo:
                aux==False
