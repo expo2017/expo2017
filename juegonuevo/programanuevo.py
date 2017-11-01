@@ -70,10 +70,9 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
     variableaux=True
     frames_totales = 0
     segundo = 0
-    tiempo+=1
     abrirfoto(screen, listadetiempo[tiempo], 0, 0)
     while variableaux==True:
-            if segundo== (tiempo-1):
+            if segundo== tiempo:
                 fondodecolor(screen,5)
                 return False
                 variableaux == False
@@ -123,21 +122,21 @@ def comprobarrespuesta(screen,tiempo, direccion1,reloj):
 def crearniveles(juego1):#agregardireccion de foto a cada nivel
     nivel1=nivel()
     nivel1.setid(1)
-    nivel1.settiempo(4)
+    nivel1.settiempo(5)
     nivel1.setjugadas(10)
     nivel1.setfoto("/home/pi/Pictures/fotointerfaz/nivel1.jpg")
     juego1.setnivel(nivel1)
 
     nivel2 = nivel()
     nivel2.setid(2)
-    nivel2.settiempo(3)
+    nivel2.settiempo(4)
     nivel2.setjugadas(15)
     nivel2.setfoto("/home/pi/Pictures/fotointerfaz/nivel2.jpg")
     juego1.setnivel(nivel2)
 
     nivel3 = nivel()
     nivel3.setid(3)
-    nivel3.settiempo(2)
+    nivel3.settiempo(3)
     nivel3.setjugadas(20)
     nivel3.setfoto("/home/pi/Pictures/fotointerfaz/nivel3.jpg")
     juego1.setnivel(nivel3)
