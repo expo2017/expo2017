@@ -270,14 +270,14 @@ def main():
                     print(frames_totales)
 
                 print(juegonuevo.puntos)
-                # insertscore(juegonuevo.puntos)
+                insertscore(juegonuevo.puntos)
                 juegonuevo.reiniciarjuego()
                 fondodecolor(screen, 1)
 
 
             if juegonuevo.gano == False:
                 print(juegonuevo.puntos)
-                #insertscore(juegonuevo.puntos)
+                insertscore(juegonuevo.puntos)
                 fondodecolor(screen,2)
                 abrirfoto(screen, "/home/pi/Pictures/fotointerfaz/perdiste1.jpg",0,0)
                 pygame.time.delay(2000)
